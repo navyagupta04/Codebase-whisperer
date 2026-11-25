@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "codebase-whisperer"
+version = "0.1.0"
+description = "A repository-aware assistant with evidence-backed answers."
+readme = "README.md"
+requires-python = ">=3.11,<3.13"
+dependencies = ["fastapi>=0.115,<1.0", "uvicorn[standard]>=0.30,<1.0", "pydantic-settings>=2.5,<3.0", "httpx>=0.27,<1.0", "streamlit>=1.39,<2.0"]
+
+[project.optional-dependencies]
+rag = ["chromadb>=0.5,<2.0", "openai>=1.50,<3.0", "tree-sitter-language-pack>=0.5"]
+mcp = ["mcp>=1.0,<2.0"]
+dev = ["pytest>=8.3,<9.0", "ruff>=0.7,<1.0", "mypy>=1.12,<2.0"]
+
+[tool.setuptools.packages.find]
+include = ["core*", "ingest*", "index*", "retrieval*", "sync*", "eval*", "agent*", "mcp_server*", "onboarding*", "summaries*", "api*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
